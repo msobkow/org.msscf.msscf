@@ -1,49 +1,21 @@
 #!/bin/bash
 cd $MSSCF_HOME
 let MavenStatus=0
-for aprojdir in msscforg/java/org.msscf \
-	v2_13-maven/org.msscf.msscf \
-	v2_13-maven/org.msscf.msscf.v2_13 \
-	v2_13-maven/org.msscf.msscf.v2_13.cflib.CFLib \
-	v2_13-maven/org.msscf.msscf.v2_13.cflib.CFLib.JavaFX \
-	v2_13-maven/org.msscf.msscf.v2_13.cfcore \
-	v2_13-maven/org.msscf.msscf.v2_13.cfsec \
-	v2_13-maven/org.msscf.msscf.v2_13.cfsec.CFSecSaxLoader \
-	v2_13-maven/org.msscf.msscf.v2_13.cfsec.CFSecRam \
-	v2_13-maven/org.msscf.msscf.v2_13.cfint \
-	v2_13-maven/org.msscf.msscf.v2_13.cfint.CFIntSaxLoader \
-	v2_13-maven/org.msscf.msscf.v2_13.cfint.CFIntRam \
-	v2_13-maven/org.msscf.msscf.v2_13.cfbam \
-	v2_13-maven/org.msscf.msscf.v2_13.cfbam.CFBamSaxLoader \
-	v2_13-maven/org.msscf.msscf.v2_13.cfbam.CFBamRam \
-	v2_13-maven/org.msscf.msscf.v2_13.cfbam.CFBamMssCF \
-	v2_13-maven/org.msscf.msscf.v2_13.cfbamcust.MSSBamCF \
-	v2_13-maven/org.msscf.msscf.v2_13.cfbamcust.CFBamXmlLoader \
-	v2_13-maven/org.msscf.msscf.v2_13.cfmodel \
-	v2_13-maven/org.msscf.msscf.v2_13.cfkbase \
-	v2_13-maven/org.msscf.msscf.v2_13.CFCli
-do
-	if [ $MavenStatus == 0 ]; then
-		if [ -a ${aprojdir}/pom.xml ]; then
-			pushd ${aprojdir}
-				mvn -U install
-				let MavenStatus=$?
-				if [ $MavenStatus != 0 ]; then
-					echo "ERROR: mvn install for ${aprojdir} returned status ${MavenStatus} - build aborted"
-				fi
-			popd
-		fi
-	fi
-done
+cd $MSSCF_HOME/v2_13-maven/org.msscf.msscf
+mvn -U install
+let MavenStatus=$?
+if [ $MavenStatus != 0 ]; then
+	echo "ERROR: mvn install for ${aprojdir} returned status ${MavenStatus} - build aborted"
+fi
 if [ $MavenStatus == 0 ]; then
-	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13.CFCli/target/org.msscf.msscf.v2_13.CFCli-2.13.42-202611070000-spring-boot.jar $MSSCF_HOME/v2_13-maven/bin-v2_13
-	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13.CFCli/target/org.msscf.msscf.v2_13.CFCli-2.13.42-202611070000-spring-boot.jar $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13-installer/bin-v2_13
-	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13.cfcore/resources/xsd/*.xsd $YCF_HOME/msobkow.github.io/msscf/2.0.13/xsd/
-	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13.cfcore/resources/xsd/*.xsd $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13-installer/website-v2_13/msscf/2.0.13/xsd/
-	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13.cfbam.CFBamSaxLoader/src/main/resources/xsd/*.xsd $YCF_HOME/msobkow.github.io/msscf/2.0.13/xsd/
-	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13.cfbam.CFBamSaxLoader/src/main/resources/xsd/*.xsd $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13-installer/website-v2_13/msscf/2.0.13/xsd/
-	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13.cfbamcust.CFBamXmlLoader/src/main/resources/xsd/mssbam-2.13.xsd $YCF_HOME/msobkow.github.io/msscf/2.0.13/xsd/
-	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13.cfbamcust.CFBamXmlLoader/src/main/resources/xsd/mssbam-2.13.xsd $MSSCF_HOME/v2_13-maven/org.msscf.msscf.v2_13-installer/website-v2_13/msscf/2.0.13/xsd/
+	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13.CFCli/target/org.msscf.msscf.v2_13.CFCli-2.13.42-snapshot-202611070000-spring-boot.jar $MSSCF_HOME/v2_13-maven/org.msscf.msscf/bin-v2_13
+	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13.CFCli/target/org.msscf.msscf.v2_13.CFCli-2.13.42-snapshot-202611070000-spring-boot.jar $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13-installer/bin-v2_13
+	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13.cfcore/resources/xsd/*.xsd $YCF_HOME/msobkow.github.io/msscf/2.0.13/xsd/
+	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13.cfcore/resources/xsd/*.xsd $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13-installer/website-v2_13/msscf/2.0.13/xsd/
+	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13.cfbam.CFBamSaxLoader/src/main/resources/xsd/*.xsd $YCF_HOME/msobkow.github.io/msscf/2.0.13/xsd/
+	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13.cfbam.CFBamSaxLoader/src/main/resources/xsd/*.xsd $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13-installer/website-v2_13/msscf/2.0.13/xsd/
+	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13.cfbamcust.CFBamXmlLoader/src/main/resources/xsd/mssbam-2.13.xsd $YCF_HOME/msobkow.github.io/msscf/2.0.13/xsd/
+	cp -v $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13.cfbamcust.CFBamXmlLoader/src/main/resources/xsd/mssbam-2.13.xsd $MSSCF_HOME/v2_13-maven/org.msscf.msscf/org.msscf.msscf.v2_13-installer/website-v2_13/msscf/2.0.13/xsd/
 	echo "SUCCESS: All 2.13 Java builds completed successfully"
 fi
 cd $MSSCF_HOME

@@ -89,13 +89,6 @@ public class MSSBamCFGenReferencePopManufacturingSchema
 				"genContext.GenDef" );
 		}
 
-		if( ! ( genDef instanceof ICFBamSchemaDefObj ) ) { 
-			throw new CFLibUnsupportedClassException( getClass(),
-				S_ProcName,
-				"genDef",
-				genDef,
-				"ICFBamSchemaDefObj" );
-		}
 		ICFBamSchemaDefObj retval = MSSBamCFGenContext.popManufacturingSchema();
 		return( retval );
 	}

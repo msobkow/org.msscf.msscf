@@ -1,9 +1,27 @@
-MSS Code Factory 2.13 Installation and Update Guide
+org.msscf.msscf.v2_13-installer - MSS Code Factory 2.13 Installation Package
 
-Download the latest alpha of MSS Code Factory 2.13 at https://github.com/msobkow/org.msscf.msscf.v2_13-installer/alpha15-202611010900/org.msscf.msscf.v2_13-installer-alpha15-202611010900.tar.gz. Extract it in your home directory, and cd into the extracted directory. You should find an "install.sh" script in that directory. Do "./install.sh" from bash, which will sudo create and change ownership and permissions on /opt/msscode to your ownership, and install the extracted files in that directory. If .msscfrc does not exist in your home directory, it will create the file, configured to use the initial knowledge base and model set installed, and producing output to /home/$USER/msscf-output. You can change the output directory that will be used by simply editing the .msscfrc file.  If .msscfrc was created, .profile is modified to define MSSCFHOME and MSSCF_HOME to point to /opt/msscode, and the current release added to beginning of the PATH. A set of symlinks to the latest versions of the runtime package, the knowledge base package, and the sample/base model package referencing the installed version are set up, replacing any existing values.
+Copyright (c) 2016-2026 Mark Stephen Sobkow (mark.sobkow@gmail.com)
 
-When it comes time to update the knowledge base or model files, extract the release.tar.gz in /opt/msscode, and update your .msscfrc file to point to the newly extracted directory tree (only the name /opt/msscode/org.msscf.msscf.v2_13.kbase-vvv will change to /opt/msscode/org.msscf.msscf.v2_13.kbase-newnewnew; the rest of the path is unchanged.) If a new release of the tool's installer is produced, I intend that you should be able to just run the new installer and have it detect the old installation and auto-update your configuration to use the freshly installed version instead.
+These files are part of MSS Code Factory 2.13, intended to be run with the Yorkton Code Fractal 3.1 Knowledge Base.
 
-Source your .profile, and now you should be able to do "ManufactureSecure31Java.bash 42" and have it produce the same YCFSecure31 code in your output directory as you find in the Yorkton Code Fractal 3.1 repositories at github.com.
+Licensed under the GNU General Public License, Version 3.0 (the "License"), Apache v2.0, or under Commercial License
+(the "Commercial License") from Mark Stephen Sobkow as indicated by the license sections of the model files in the
+enclosed model archives, with the executables and run scripts all under GNU GPL 3.0 or Commercial License; only some of
+the model files are under Apache 2.0. You may not use this file nor derive variations of it except in compliance with
+the License or Commercial License, meaning only the Apache 2.0 licensed models can be extended without restriction to build
+proprietary applications without a Commercial License from Mark Sobkow.
 
-The "website-v2_13" directory added to the installation alongside the "bin-v2_13" subdirectory needs to be made visible as an HTTP hosted domain (not a virtual host sharing an IP address) within your network, with a modified /etc/hosts to mapping the host names "msscf.org" and "mcf.markhome.server" to that IP address so that the tool can resolve the .xsd files needed. This local website is just a copy of the website at https://msobkow.github.io/, so if you can figure out a way to surgically map your network lookups of the required host names to https://msobkow.github.io/, then you don't need to locally host the pages, just alias the host names. (Logic says the likes of Cisco routers can do this.)
+You may obtain a copy of the License at:
+
+    http://gnu.org/
+
+The terms of the Commercial Licenses are tailored to the needs of the client.
+
+Unless required by applicable law or agreed to in writing, software distributed under the Licenses
+is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied.  See the Licenses for the specific language governing permissions and limitations under the Licenses.
+
+If you wish to modify and use this code without publishing your changes, or integrate it with proprietary code,
+please contact Mark Stephen Sobkow for a commercial license at mark.sobkow@gmail.com
+
+SPDX-License-Identifier: GPL-3.0

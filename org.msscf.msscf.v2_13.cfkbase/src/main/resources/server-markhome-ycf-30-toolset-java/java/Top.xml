@@ -38,10 +38,11 @@
 	<GenRule GenDef="Object" Name="ExplainCodeVisProtected">CodeVis Protected, meaning that any only user interfaces and application code specific to the defining schema can access it</GenRule>
 	<GenRule GenDef="Object" Name="ExplainCodeVisPrivate">CodeVis Private, meaning that only the back-end code for the schema implementation can access it, and even the code specific user interface cannot</GenRule>
 
-	<GenRule GenDef="MinorVersion" Name="top">$iterate SchemaDef( each AllSchemaFiles empty empty )$</GenRule>
-	<GenRule GenDef="SchemaDef" Name="top">$iterate SchemaRefs( each AllSchemaFiles empty empty )$$AllSchemaFiles$</GenRule>
+	<GenRule GenDef="MinorVersion" Name="top">$iterate SchemaDef( each FullSetSchemaFiles empty empty )$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="top">$FullSetSchemaFiles$</GenRule>
+	<GenRule GenDef="SchemaDef" Name="FullSetSchemaFiles">$iterate SchemaRefs( each FullSetSchemaFiles empty empty )$$AllSchemaFiles$</GenRule>
 	<GenRule GenDef="SchemaDef" Name="AllSchemaFiles">$schemaPubFiles$$schemaProtFiles$$schemaFiles$</GenRule>
-	<GenRule GenDef="SchemaRef" Name="AllSchemaFiles">$reference PushManufacturingSchema AllSchemaFiles reference PopManufacturingSchema$</GenRule>
+	<GenRule GenDef="SchemaRef" Name="FullSetSchemaFiles">$reference RefSchema reference PushManufacturingSchema AllSchemaFiles$$reference PopManufacturingSchema$</GenRule>
 
 	<GenRule GenDef="Relation" Name="ToTableHasClassCode"
 		>$reference ToTable HasClassCode$</GenRule>

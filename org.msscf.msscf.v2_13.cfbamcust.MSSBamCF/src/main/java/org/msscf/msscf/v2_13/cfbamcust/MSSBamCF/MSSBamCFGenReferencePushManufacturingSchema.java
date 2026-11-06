@@ -89,19 +89,15 @@ public class MSSBamCFGenReferencePushManufacturingSchema
 				"genContext.GenDef" );
 		}
 
-		if( ! ( genDef instanceof ICFBamSchemaRefObj ) ) { 
+		if( ! ( genDef instanceof ICFBamSchemaDefObj ) ) { 
 			throw new CFLibUnsupportedClassException( getClass(),
 				S_ProcName,
 				"genDef",
 				genDef,
-				"ICFBamSchemaRefObj" );
+				"ICFBamSchemaDefObj" );
 		}
-		ICFBamSchemaRefObj refObj = (ICFBamSchemaRefObj)genDef;
-		ICFBamSchemaDefObj referenced = refObj.getOptionalLookupRefSchema();
-		if (referenced == null) {
-			throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "genContext.(SchemaRef)GenDef.RefSchema");
-		}
-		MSSBamCFGenContext.pushManufacturingSchema(referenced);
-		return( referenced );
+		ICFBamSchemaDefObj defObj = (ICFBamSchemaDefObj)genDef;
+		defObj = MSSBamCFGenContext.pushManufacturingSchema(defObj);
+		return( defObj );
 	}
 }

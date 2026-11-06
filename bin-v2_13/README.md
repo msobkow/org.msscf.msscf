@@ -1,36 +1,24 @@
-Copyright (c) 2016-2026 Mark Stephen Sobkow
+org.msscf.msscf/bin-v2_13 - MSS Code Factory 2.13 Executables
 
-Mark's Code Fractal 3.1 aka MSS Code Factory
+Copyright (c) 2016-2026 Mark Stephen Sobkow (mark.sobkow@gmail.com)
 
-These files are part of Mark's Code Fractal.
+These files are part of MSS Code Factory 2.13, intended to be run with the Yorkton Code Fractal 3.1 Knowledge Base.
 
-Mark's Code Fractal is available under dual commercial license from
-Mark Stephen Sobkow, or under the terms of the GNU General Public License,
-Version 3 or later with classpath and static linking exceptions.
+Licensed under the GNU General Public License, Version 3.0 (the "License") or under Commercial License
+(the "Commercial License") from Mark Stephen Sobkow. You may not use this file nor derive variations
+of it except in compliance with the License or Commercial License.
 
-As a special exception, Mark Sobkow gives you permission to link this library
-with independent modules to produce an executable, provided that none of them
-conflict with the intent of the GPLv3; that is, you are not allowed to invoke
-the methods of this library from non-GPLv3-compatibly licensed code. You may not
-implement an LPGLv3 "wedge" to try to bypass this restriction. That said, code which
-does not rely on this library is free to specify whatever license its authors decide
-to use. Mark Sobkow specifically rejects the infectious nature of the GPLv3, and
-considers the mere act of including GPLv3 modules in an executable to be perfectly
-reasonable given tools like modern Java's single-jar deployment options.
+You may obtain a copy of the License at:
 
-Mark's Code Fractal is free software: you can redistribute it and/or
-modify it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+    http://gnu.org/
 
-Mark's Code Fractal is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+The terms of the Commercial Licenses are tailored to the needs of the client.
 
-You should have received a copy of the GNU General Public License
-along with Mark's Code Fractal.  If not, see <https://www.gnu.org/licenses/>.
+Unless required by applicable law or agreed to in writing, software distributed under the Licenses
+is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied.  See the Licenses for the specific language governing permissions and limitations under the Licenses.
 
-If you wish to modify and use this code without publishing your changes,
-or integrate it with proprietary code, please contact Mark Stephen Sobkow
-for a commercial license at mark.sobkow@gmail.com
+If you wish to modify and use this code without publishing your changes, or integrate it with proprietary code,
+please contact Mark Stephen Sobkow for a commercial license at mark.sobkow@gmail.com
+
+SPDX-License-Identifier: GPL-3.0
