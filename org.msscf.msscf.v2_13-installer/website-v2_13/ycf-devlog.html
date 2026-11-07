@@ -28,12 +28,12 @@
 <p>
 <CENTER><H2>Yorkton Code Fractal Development Log</H2></CENTER>
 <p>
-<strong>2026-11-01 09:00 CST MSS Code Factory alpha15</strong> released at <a href="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/2.13.42-alpha15-202611010900">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/15-202611010900</a>. You can find installation instructions at <a href="https://github.com/msobkow/org.msscf.msscf.v2_13-installer">https://github.com/msobkow/org.msscf.msscf.v2_13-installer</a> and the README.md displayed there. There have also been releases of the 2.13 knowledge base and model set as of 2026-11-01 09:00 CST, tagged as <tt>2.13.42-alpha15-202611010900</tt> which are included in the installer and are required alongside the executable jars to run the tool. Alpha15 continues the TeaVM work, but it doesn't run properly due to inconsistencies.  It produces some code, so it isn't completely broken like last time - I am quite certain the problem lies in the knowledge base and loading of server.markhome.ycf.v3_1.toolset.any.
+<strong>2026-11-07 00:00 CST MSS Code Factory alpha16</strong> released at <a href="https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/2.13.42-alpha16-202611070000">https://github.com/msobkow/org.msscf.msscf.v2_13-installer/releases/tag/2.13.42-alpha16-202611070000</a>. You can find installation instructions at <a href="https://github.com/msobkow/org.msscf.msscf.v2_13-installer">https://github.com/msobkow/org.msscf.msscf.v2_13-installer</a> and the README.md displayed there. There have also been releases of the 2.13 knowledge base and model set as of 2026-11-07 00:00 CST, tagged as <tt>2.13.42-alpha16-202611070000</tt> which are included in the installer and are required alongside the executable jars to run the tool. Alpha16 continues the TeaVM work, but it doesn't run properly due to inconsistencies.  This version runs clean, and automatically tries to produce the referenced schemas as well as the current schema.
 <p>
 <H2>Current Progress Numbers</H2>
 <p>
-Total Lines of Currently Shared Knowledge Base files: 84,824<br>
-Total Lines in MSS Code Factory 2.13 Code Base: 3,867,020</br>
+Total Lines of Currently Shared Knowledge Base files: 84,828<br>
+Total Lines in MSS Code Factory 2.13 Code Base: 3,760,519</br>
 Total Lines in Yorkton Code Fractal 3.1 ycf-core (hand-written code being worked on): 45,546
 <p>
 <H2>Overview And Near-Term Plans</H2>
@@ -64,6 +64,8 @@ So unlike the architecture behind MSS Code Factory 2.13, the code base behind Yo
 <p>
 I also have some ideas around data filter definition and processing in conjunction with event-based condition evaluation and propagation that could yield some interesting results for deploying the actual business logic behind a system in as reusable a fashion as possible. To be honest, I wonder if I'll ever be done with my code base, or if I'll still be working on it the day they strap me into an extra-long-sleeved jacket for permanent residence in a rubber room somewhere...
 <dl>
+<dt>2026-11-07 00:00 CST</dt><dd>MSS Code Factory 2.13.42-alpha16-202611070000 released.</dd>
+<dt>2026-11-06 21:45 CST</dt><dd>MSS Code Factory 2.13.42-alpha16-202611070000 is ready for release.</dd>
 <dt>2026-11-05 19:20 CST</dt><dd>Added README.md files to all sub-projects and modules, made sure the gpl-3.0-with-classpath-exception.txt file is copied to all sub-project directories, and half-way done the effort of pushing manufacturing schemas to generate the referenced schemas from the main project schema whose source code is being produced. The push and pop operations technically work, but I've neglected to push and pop GenKbContext implementations from the context stack of the engine yet, so the code is incorrectly produced and defined.</dd>
 <dt>2026-11-04 13:30 CST</dt><dd>The sub-project modules pom.xml files should never be project roots - they're ALWAYS a subproject.</dd>
 <dt>2026-11-04 13:15 CST</dt><dd>The org.msscf.msscf project has been consolidated into a single source code repository for easier editing and source coordination.</dd>
