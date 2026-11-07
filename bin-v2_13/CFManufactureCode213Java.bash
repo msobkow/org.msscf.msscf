@@ -16,5 +16,5 @@ if [ "$MCF_RULE_JAR" != "" ]; then
 else
 	export ruleargs=""
 fi
-"$JAVA" $JAVA_LOG4J -ea -Xms1023M $ruleargs -jar ./org.msscf.msscf.v2_13.CFCli-2.13.42-snapshot-202611070000-spring-boot.jar $cmdargs
+"$JAVA" $JAVA_LOG4J -ea -Xms1023M $ruleargs -jar ./org.msscf.msscf.v2_13.CFCli-2.13.42-snapshot-202611071400-spring-boot.jar $cmdargs
 cd $MSSCF_HOME
