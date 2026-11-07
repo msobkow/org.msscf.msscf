@@ -71,6 +71,8 @@ public class CFGenKbSchemaObj
 	protected ICFGenKbGelIteratorTableObj gelIteratorTableObj;
 	protected ICFGenKbGelModifierTableObj gelModifierTableObj;
 	protected ICFGenKbGelPopTableObj gelPopTableObj;
+	protected ICFGenKbGelPushContextTableObj gelPushContextTableObj;
+	protected ICFGenKbGelPopContextTableObj gelPopContextTableObj;
 	protected ICFGenKbGelPrefixLineTableObj gelPrefixLineTableObj;
 	protected ICFGenKbGelReferenceTableObj gelReferenceTableObj;
 	protected ICFGenKbGelSequenceTableObj gelSequenceTableObj;
@@ -120,6 +122,8 @@ public class CFGenKbSchemaObj
 		gelIteratorTableObj = new CFGenKbGelIteratorTableObj( this );
 		gelModifierTableObj = new CFGenKbGelModifierTableObj( this );
 		gelPopTableObj = new CFGenKbGelPopTableObj( this );
+		gelPushContextTableObj = new CFGenKbGelPushContextTableObj( this );
+		gelPopContextTableObj = new CFGenKbGelPopContextTableObj( this );
 		gelPrefixLineTableObj = new CFGenKbGelPrefixLineTableObj( this );
 		gelReferenceTableObj = new CFGenKbGelReferenceTableObj( this );
 		gelSequenceTableObj = new CFGenKbGelSequenceTableObj( this );
@@ -697,6 +701,12 @@ public class CFGenKbSchemaObj
 		if( gelPopTableObj != null ) {
 			gelPopTableObj.minimizeMemory();
 		}
+		if( gelPushContextTableObj != null ) {
+			gelPushContextTableObj.minimizeMemory();
+		}
+		if( gelPopContextTableObj != null ) {
+			gelPopContextTableObj.minimizeMemory();
+		}
 		if( gelPrefixLineTableObj != null ) {
 			gelPrefixLineTableObj.minimizeMemory();
 		}
@@ -870,6 +880,14 @@ public class CFGenKbSchemaObj
 
 	public ICFGenKbGelPopTableObj getGelPopTableObj() {
 		return( gelPopTableObj );
+	}
+
+	public ICFGenKbGelPushContextTableObj getGelPushContextTableObj() {
+		return( gelPushContextTableObj );
+	}
+
+	public ICFGenKbGelPopContextTableObj getGelPopContextTableObj() {
+		return( gelPopContextTableObj );
 	}
 
 	public ICFGenKbGelPrefixLineTableObj getGelPrefixLineTableObj() {

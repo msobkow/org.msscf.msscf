@@ -43,6 +43,35 @@ extends CFGenKbSchemaObj
 
 	protected ICFGenKbGelCacheObj	gelCache = null;
 
+	protected static ArrayList<MssCFGenContext> contextStack = new ArrayList<>();
+
+	public static MssCFGenContext pushContext(MssCFGenContext value) {
+		if (value != null) {
+			contextStack.add(value);
+			return(value);
+		}
+		else {
+			if (!contextStack.isEmpty()) {
+				return(contextStack.getLast());
+			}
+			else {
+				return(null);
+			}
+		}
+	}
+
+	public static MssCFGenContext popContext() {
+		MssCFGenContext retval;
+		if (!contextStack.isEmpty()) {
+			retval = contextStack.getLast();
+			contextStack.removeLast();
+		}
+		else {
+			retval = null;
+		}
+		return(retval);
+	}
+
 	public ICFGenKbGelCacheObj getGelCache() {
 		if( gelCache == null ) {
 			ICFGenKbGelCacheObj cacheObj = (ICFGenKbGelCacheObj)( getGelCacheTableObj().newInstance() );

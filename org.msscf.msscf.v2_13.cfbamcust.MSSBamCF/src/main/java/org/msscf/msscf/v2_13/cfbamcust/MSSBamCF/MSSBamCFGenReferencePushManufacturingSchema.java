@@ -43,11 +43,10 @@
 
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
+import java.util.List;
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamRelationObj;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamSchemaDefObj;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamSchemaRefObj;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamTableObj;
+import org.msscf.msscf.v2_13.cfcore.CFGenKbObj.ICFGenKbGelInstructionObj;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 
 public class MSSBamCFGenReferencePushManufacturingSchema
@@ -96,8 +95,12 @@ public class MSSBamCFGenReferencePushManufacturingSchema
 				genDef,
 				"ICFBamSchemaDefObj" );
 		}
+
 		ICFBamSchemaDefObj defObj = (ICFBamSchemaDefObj)genDef;
+		MssCFGenContext subContext = genContext.buildRefContext( null, genDef);
 		defObj = MSSBamCFGenContext.pushManufacturingSchema(defObj);
-		return( defObj );
+		MssCFEngine.pushContext(subContext);
+
+		return( genDef );
 	}
 }

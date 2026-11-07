@@ -158,6 +158,8 @@ public class CFGenKbSchema
 	protected ICFGenKbGelIteratorTable tableGelIterator;
 	protected ICFGenKbGelModifierTable tableGelModifier;
 	protected ICFGenKbGelPopTable tableGelPop;
+	protected ICFGenKbGelPushContextTable tableGelPushContext;
+	protected ICFGenKbGelPopContextTable tableGelPopContext;
 	protected ICFGenKbGelPrefixLineTable tableGelPrefixLine;
 	protected ICFGenKbGelReferenceTable tableGelReference;
 	protected ICFGenKbGelSequenceTable tableGelSequence;
@@ -206,6 +208,8 @@ public class CFGenKbSchema
 	protected ICFGenKbGelIteratorFactory factoryGelIterator;
 	protected ICFGenKbGelModifierFactory factoryGelModifier;
 	protected ICFGenKbGelPopFactory factoryGelPop;
+	protected ICFGenKbGelPushContextFactory factoryGelPushContext;
+	protected ICFGenKbGelPopContextFactory factoryGelPopContext;
 	protected ICFGenKbGelPrefixLineFactory factoryGelPrefixLine;
 	protected ICFGenKbGelReferenceFactory factoryGelReference;
 	protected ICFGenKbGelSequenceFactory factoryGelSequence;
@@ -259,6 +263,8 @@ public class CFGenKbSchema
 		tableGelIterator = null;
 		tableGelModifier = null;
 		tableGelPop = null;
+		tableGelPushContext = null;
+		tableGelPopContext = null;
 		tableGelPrefixLine = null;
 		tableGelReference = null;
 		tableGelSequence = null;
@@ -307,6 +313,8 @@ public class CFGenKbSchema
 		factoryGelIterator = new CFGenKbGelIteratorDefaultFactory();
 		factoryGelModifier = new CFGenKbGelModifierDefaultFactory();
 		factoryGelPop = new CFGenKbGelPopDefaultFactory();
+		factoryGelPushContext = new CFGenKbGelPushContextDefaultFactory();
+		factoryGelPopContext = new CFGenKbGelPopContextDefaultFactory();
 		factoryGelPrefixLine = new CFGenKbGelPrefixLineDefaultFactory();
 		factoryGelReference = new CFGenKbGelReferenceDefaultFactory();
 		factoryGelSequence = new CFGenKbGelSequenceDefaultFactory();
@@ -365,6 +373,8 @@ public class CFGenKbSchema
 		tableGelIterator = null;
 		tableGelModifier = null;
 		tableGelPop = null;
+		tableGelPushContext = null;
+		tableGelPopContext = null;
 		tableGelPrefixLine = null;
 		tableGelReference = null;
 		tableGelSequence = null;
@@ -413,6 +423,8 @@ public class CFGenKbSchema
 		factoryGelIterator = new CFGenKbGelIteratorDefaultFactory();
 		factoryGelModifier = new CFGenKbGelModifierDefaultFactory();
 		factoryGelPop = new CFGenKbGelPopDefaultFactory();
+		factoryGelPushContext = new CFGenKbGelPushContextDefaultFactory();
+		factoryGelPopContext = new CFGenKbGelPopContextDefaultFactory();
 		factoryGelPrefixLine = new CFGenKbGelPrefixLineDefaultFactory();
 		factoryGelReference = new CFGenKbGelReferenceDefaultFactory();
 		factoryGelSequence = new CFGenKbGelSequenceDefaultFactory();
@@ -471,6 +483,8 @@ public class CFGenKbSchema
 		tableGelIterator = null;
 		tableGelModifier = null;
 		tableGelPop = null;
+		tableGelPushContext = null;
+		tableGelPopContext = null;
 		tableGelPrefixLine = null;
 		tableGelReference = null;
 		tableGelSequence = null;
@@ -519,6 +533,8 @@ public class CFGenKbSchema
 		factoryGelIterator = new CFGenKbGelIteratorDefaultFactory();
 		factoryGelModifier = new CFGenKbGelModifierDefaultFactory();
 		factoryGelPop = new CFGenKbGelPopDefaultFactory();
+		factoryGelPushContext = new CFGenKbGelPushContextDefaultFactory();
+		factoryGelPopContext = new CFGenKbGelPopContextDefaultFactory();
 		factoryGelPrefixLine = new CFGenKbGelPrefixLineDefaultFactory();
 		factoryGelReference = new CFGenKbGelReferenceDefaultFactory();
 		factoryGelSequence = new CFGenKbGelSequenceDefaultFactory();
@@ -906,6 +922,38 @@ public class CFGenKbSchema
 
 	public void setFactoryGelPop( ICFGenKbGelPopFactory value ) {
 		factoryGelPop = value;
+	}
+
+	public ICFGenKbGelPushContextTable getTableGelPushContext() {
+		return( tableGelPushContext );
+	}
+
+	public void setTableGelPushContext( ICFGenKbGelPushContextTable value ) {
+		tableGelPushContext = value;
+	}
+
+	public ICFGenKbGelPushContextFactory getFactoryGelPushContext() {
+		return( factoryGelPushContext );
+	}
+
+	public void setFactoryGelPushContext( ICFGenKbGelPushContextFactory value ) {
+		factoryGelPushContext = value;
+	}
+
+	public ICFGenKbGelPopContextTable getTableGelPopContext() {
+		return( tableGelPopContext );
+	}
+
+	public void setTableGelPopContext( ICFGenKbGelPopContextTable value ) {
+		tableGelPopContext = value;
+	}
+
+	public ICFGenKbGelPopContextFactory getFactoryGelPopContext() {
+		return( factoryGelPopContext );
+	}
+
+	public void setFactoryGelPopContext( ICFGenKbGelPopContextFactory value ) {
+		factoryGelPopContext = value;
 	}
 
 	public ICFGenKbGelPrefixLineTable getTableGelPrefixLine() {

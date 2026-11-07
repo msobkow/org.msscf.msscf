@@ -68,6 +68,8 @@ public class CFGenKbRamSchema
 		tableGelIterator = new CFGenKbRamGelIteratorTable( this );
 		tableGelModifier = new CFGenKbRamGelModifierTable( this );
 		tableGelPop = new CFGenKbRamGelPopTable( this );
+		tableGelPushContext = new CFGenKbRamGelPushContextTable( this );
+		tableGelPopContext = new CFGenKbRamGelPopContextTable( this );
 		tableGelPrefixLine = new CFGenKbRamGelPrefixLineTable( this );
 		tableGelReference = new CFGenKbRamGelReferenceTable( this );
 		tableGelSequence = new CFGenKbRamGelSequenceTable( this );

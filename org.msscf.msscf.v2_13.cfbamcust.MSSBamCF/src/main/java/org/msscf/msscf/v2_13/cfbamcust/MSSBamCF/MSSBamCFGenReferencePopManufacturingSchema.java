@@ -67,7 +67,7 @@ public class MSSBamCFGenReferencePopManufacturingSchema
 		String genDefClassName,
 		String itemName)
 	{
-		super(argSchema, toolset, scopeDefClassName, genDefClassName, itemName, "Relation");
+		super(argSchema, toolset, scopeDefClassName, genDefClassName, itemName, "SchemaDef");
 	}
 
 	public ICFLibAnyObj dereference( MssCFGenContext genContext) {
@@ -89,7 +89,9 @@ public class MSSBamCFGenReferencePopManufacturingSchema
 				"genContext.GenDef" );
 		}
 
-		ICFBamSchemaDefObj retval = MSSBamCFGenContext.popManufacturingSchema();
-		return( retval );
+		ICFBamSchemaDefObj popSchema = MSSBamCFGenContext.popManufacturingSchema();
+		MssCFEngine.popContext();
+
+		return( popSchema );
 	}
 }

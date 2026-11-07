@@ -253,6 +253,20 @@ public interface ICFGenKbSchemaObj
 	ICFGenKbGelPrefixLineTableObj getGelPrefixLineTableObj();
 
 	/**
+	 *	Get the GelPushContext interface for the schema.
+	 *
+	 *	@return	The ICFGenKbGelPushContextTableObj interface implementation for the schema.
+	 */
+	ICFGenKbGelPushContextTableObj getGelPushContextTableObj();
+
+	/**
+	 *	Get the GelPopContext interface for the schema.
+	 *
+	 *	@return	The ICFGenKbGelPopContextTableObj interface implementation for the schema.
+	 */
+	ICFGenKbGelPopContextTableObj getGelPopContextTableObj();
+
+	/**
 	 *	Get the GelReference interface for the schema.
 	 *
 	 *	@return	The ICFGenKbGelReferenceTableObj interface implementation for the schema.

@@ -554,6 +554,12 @@ public class MssCFGelCompiler
 	public final String _POPONEFROMTOP = "poponefromtop";
 
 	/**
+	 *	The macro language supports explicitly pushcontexting and popping from the expansion context stack.
+	 */
+	public final String	_POPCONTEXT = "popcontext";
+	public final String	_PUSHCONTEXT = "pushcontextcontext";
+
+	/**
 	 *	References let the macro language "call" an expansion
 	 *	from a completely different context.  See notes 12-MAY-1998.
 	 */
@@ -1444,6 +1450,108 @@ public class MssCFGelCompiler
 
 		public String expand( MssCFGenContext genContext ) {
 			final String S_ProcName = "MssCFPop.expand() ";
+			MssCFEngine genEngine = genContext.getGenEngine();
+
+			String goalTypeName = this.getRequiredGoalTypeName();
+			int numToPop = Integer.parseInt( goalTypeName );
+			MssCFGenContext goalContext = genContext;
+			while( ( numToPop > 0 ) && ( goalContext != null ) ) {
+				goalContext = goalContext.getPrevContext();
+				numToPop --;
+			}
+
+			if( goalContext == null ) {
+				genEngine.getLog().message( S_ProcName + "Already at the top of the context stack. \""
+					+ "$" + getRequiredSourceText() + "$"
+					+ "\" could not be expanded" );
+				return( null );
+			}
+
+			ICFLibAnyObj refDef = goalContext.getGenDef();
+			if( refDef == null ) {
+				genEngine.getLog().message( S_ProcName + "GenDef of popped context is null! \""
+						+ "$" + getRequiredSourceText() + "$"
+						+ "\" could not be expanded" );
+				return( null );
+			}
+
+			MssCFGenContext refContext = goalContext.buildRefContext( goalContext.getGeneratingBuild(), refDef );
+			if (refContext == null) {
+				throw new RuntimeException(S_ProcName + "buildRefContext() failed");
+			}
+			refContext.setPrevContext(genContext);
+
+			ICFGenKbGelInstructionObj remainder = getOptionalLookupRemainder();
+			if( remainder == null ) {
+				throw new RuntimeException( S_ProcName + "Remainder of macro was not compiled for execution" );
+			}
+
+			String ret = remainder.expand( refContext );
+
+			return( ret );
+		}
+	}
+
+	protected class MssCFPushContext
+	extends CFGenKbGelPushContextObj
+	{
+		public MssCFPushContext( ICFGenKbSchemaObj argSchema ) {
+			super( argSchema );
+		}
+
+		public String expand( MssCFGenContext genContext ) {
+			final String S_ProcName = "MssCFPushContext.expand() ";
+			MssCFEngine genEngine = genContext.getGenEngine();
+
+			String goalTypeName = this.getRequiredGoalTypeName();
+			int numToPop = Integer.parseInt( goalTypeName );
+			MssCFGenContext goalContext = genContext;
+			while( ( numToPop > 0 ) && ( goalContext != null ) ) {
+				goalContext = goalContext.getPrevContext();
+				numToPop --;
+			}
+
+			if( goalContext == null ) {
+				genEngine.getLog().message( S_ProcName + "Already at the top of the context stack. \""
+					+ "$" + getRequiredSourceText() + "$"
+					+ "\" could not be expanded" );
+				return( null );
+			}
+
+			ICFLibAnyObj refDef = goalContext.getGenDef();
+			if( refDef == null ) {
+				genEngine.getLog().message( S_ProcName + "GenDef of popped context is null! \""
+						+ "$" + getRequiredSourceText() + "$"
+						+ "\" could not be expanded" );
+				return( null );
+			}
+
+			MssCFGenContext refContext = goalContext.buildRefContext( goalContext.getGeneratingBuild(), refDef );
+			if (refContext == null) {
+				throw new RuntimeException(S_ProcName + "buildRefContext() failed");
+			}
+			refContext.setPrevContext(genContext);
+
+			ICFGenKbGelInstructionObj remainder = getOptionalLookupRemainder();
+			if( remainder == null ) {
+				throw new RuntimeException( S_ProcName + "Remainder of macro was not compiled for execution" );
+			}
+
+			String ret = remainder.expand( refContext );
+
+			return( ret );
+		}
+	}
+
+	protected class MssCFPopContext
+	extends CFGenKbGelPopContextObj
+	{
+		public MssCFPopContext( ICFGenKbSchemaObj argSchema ) {
+			super( argSchema );
+		}
+
+		public String expand( MssCFGenContext genContext ) {
+			final String S_ProcName = "MssCFPopContext.expand() ";
 			MssCFEngine genEngine = genContext.getGenEngine();
 
 			String goalTypeName = this.getRequiredGoalTypeName();
@@ -3970,6 +4078,180 @@ public class MssCFGelCompiler
 		popEdit = null;
 
 		ret = popObj;
+
+		return( ret );
+	}
+
+	/**
+	 *	Macros that start with "pushcontext " are special directives
+	 *	which temporarily pushcontext a context for the current defObj into the context stack/chain.
+	 *
+	 *	@param		macro		String
+	 *	@return	String		The result of expanding the macro.
+	 */
+	protected ICFGenKbGelInstructionObj compilePushContext( String macro )
+	{
+		int					start;
+		int					lenMacro = 0;
+		char				ch;
+		String				remainingMacro = null;
+		ICFGenKbGelInstructionObj ret = null;
+		final String S_ProcName = "MssCFGelCompiler.compilePushContext() ";
+		final String S_MsgEmptyNotAllowedForMacro = "Empty value not allowed for macro";
+
+	//	Validate parameters
+
+		lenMacro = ( macro != null ) ? macro.length() : 0;
+		if( lenMacro <= 0 ) {
+			StringBuffer msg = new StringBuffer( getClass().getSimpleName() );
+			msg.append( '.' );
+			msg.append( S_ProcName );
+			msg.append( "() " );
+			msg.append( S_MsgEmptyNotAllowedForMacro );
+			msg.append( " \"" );
+			msg.append( (( macro != null ) ? macro : "" ) + "\" is invalid" );
+			setCompileError();
+			getCompileLog().message( msg.toString() );
+			return( null );
+		}
+
+		if( ! macro.startsWith( _PUSHCONTEXT ) ) {
+			StringBuffer msg = new StringBuffer( getClass().getSimpleName() );
+			msg.append( '.' );
+			msg.append( S_ProcName );
+			msg.append( "() Method should only be invoked for " );
+			msg.append( _PUSHCONTEXT );
+			msg.append( " macros." );
+			setCompileError();
+			getCompileLog().message( msg.toString() );
+			return( null );
+		}
+
+	//	Set the cursor past "pushcontext"
+
+		start = _PUSHCONTEXT.length();
+
+	//	Skip any intervening whitespace
+
+		while ( ( start < lenMacro ) &&	( ( ch = macro.charAt(start)) == ' ' ) ) {
+			start = start + 1;
+		}
+
+	//	Whatever remains of the macro will be passed on to the goal context
+
+		if( start >= lenMacro ) {
+			StringBuffer msg = new StringBuffer( getClass().getSimpleName() );
+			msg.append( '.' );
+			msg.append( S_ProcName );
+			msg.append( "() Malformed pushcontext directive must provide a macro body to be expanded. \"" );
+			msg.append( macro );
+			msg.append( "\" is invalid\n" );
+			setCompileError();
+			getCompileLog().message( msg.toString() );
+			return( null );
+		}
+
+		remainingMacro = macro.substring( start );
+
+		ICFGenKbGelPushContextObj pushcontextObj = new MssCFPushContext( genEngine ); 
+		ICFGenKbGelPushContextEditObj pushcontextEdit = (ICFGenKbGelPushContextEditObj)pushcontextObj.beginEdit();
+		pushcontextEdit.setRequiredOwnerTenant( myGelCache.getRequiredOwnerTenant() );
+		pushcontextEdit.setRequiredContainerGelCache( myGelCache );
+		pushcontextEdit.setRequiredGoalTypeName( genEngine.getGenContext().getGenDef().getGenDefName() );
+		pushcontextEdit.setRequiredSourceText( macro );
+		pushcontextObj = (ICFGenKbGelPushContextObj)pushcontextEdit.create();
+		pushcontextEdit = null;
+
+		ICFGenKbGelInstructionObj remainder = compileMacro( remainingMacro);
+		if( remainder == null ) {
+			StringBuffer msg = new StringBuffer( getClass().getSimpleName() );
+			msg.append( '.' );
+			msg.append( S_ProcName );
+			msg.append( "() Remainder of macro did not compile to an instruction. \"" );
+			msg.append( macro );
+			msg.append( "\" is invalid\n" );
+			setCompileError();
+			getCompileLog().message( msg.toString() );
+			return (null);
+		}
+
+		pushcontextEdit = (ICFGenKbGelPushContextEditObj)pushcontextObj.beginEdit();
+		pushcontextEdit.setOptionalLookupRemainder( remainder );
+		pushcontextEdit.update();
+		pushcontextEdit = null;
+
+		ret = pushcontextObj;
+
+		return( ret );
+	}
+
+	/**
+	 *	Macros that start with "pushcontext " are special directives
+	 *	which temporarily pushcontext a context for the current defObj into the context stack/chain.
+	 *
+	 *	@param		macro		String
+	 *	@return	String		The result of expanding the macro.
+	 */
+	protected ICFGenKbGelInstructionObj compilePopContext( String macro )
+	{
+		int					start;
+		int					lenMacro = 0;
+		char				ch;
+		String				remainingMacro = null;
+		ICFGenKbGelInstructionObj ret = null;
+		final String S_ProcName = "MssCFGelCompiler.compilePopContext() ";
+		final String S_MsgEmptyNotAllowedForMacro = "Empty value not allowed for macro";
+
+	//	Validate parameters
+
+		lenMacro = ( macro != null ) ? macro.length() : 0;
+		if( lenMacro <= 0 ) {
+			StringBuffer msg = new StringBuffer( getClass().getSimpleName() );
+			msg.append( '.' );
+			msg.append( S_ProcName );
+			msg.append( "() " );
+			msg.append( S_MsgEmptyNotAllowedForMacro );
+			msg.append( " \"" );
+			msg.append( (( macro != null ) ? macro : "" ) + "\" is invalid" );
+			setCompileError();
+			getCompileLog().message( msg.toString() );
+			return( null );
+		}
+
+		if( ! macro.startsWith( _POPCONTEXT ) ) {
+			StringBuffer msg = new StringBuffer( getClass().getSimpleName() );
+			msg.append( '.' );
+			msg.append( S_ProcName );
+			msg.append( "() Method should only be invoked for " );
+			msg.append( _POPCONTEXT );
+			msg.append( " macros." );
+			setCompileError();
+			getCompileLog().message( msg.toString() );
+			return( null );
+		}
+
+	//	Set the cursor past "popcontext"
+
+		start = _POPCONTEXT.length();
+
+	//	Skip any intervening whitespace
+
+		while ( ( start < lenMacro ) &&	( ( ch = macro.charAt(start)) == ' ' ) ) {
+			start = start + 1;
+		}
+
+		remainingMacro = macro.substring( start );
+
+		ICFGenKbGelPopContextObj popcontextObj = new MssCFPopContext( genEngine ); 
+		ICFGenKbGelPopContextEditObj popcontextEdit = (ICFGenKbGelPopContextEditObj)popcontextObj.beginEdit();
+		popcontextEdit.setRequiredOwnerTenant( myGelCache.getRequiredOwnerTenant() );
+		popcontextEdit.setRequiredContainerGelCache( myGelCache );
+		popcontextEdit.setRequiredGoalTypeName( genEngine.getGenContext().getGenDef().getGenDefName() );
+		popcontextEdit.setRequiredSourceText( macro );
+		popcontextObj = (ICFGenKbGelPopContextObj)popcontextEdit.create();
+		popcontextEdit = null;
+
+		ret = popcontextObj;
 
 		return( ret );
 	}

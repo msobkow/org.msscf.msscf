@@ -467,6 +467,42 @@ public interface ICFGenKbSchema
 	ICFGenKbGelPopFactory getFactoryGelPop();
 
 	/**
+	 *	Get the GelPushContext Table interface for the schema.
+	 *
+	 *	@return	The GelPushContext Table interface for the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	ICFGenKbGelPushContextTable getTableGelPushContext();
+
+	/**
+	 *	Get the GelPushContext Factory interface for the schema.
+	 *
+	 *	@return	The GelPushContext Factory interface for the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	ICFGenKbGelPushContextFactory getFactoryGelPushContext();
+
+	/**
+	 *	Get the GelPopContext Table interface for the schema.
+	 *
+	 *	@return	The GelPopContext Table interface for the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	ICFGenKbGelPopContextTable getTableGelPopContext();
+
+	/**
+	 *	Get the GelPopContext Factory interface for the schema.
+	 *
+	 *	@return	The GelPopContext Factory interface for the schema.
+	 *
+	 *	@throws CFLibNotSupportedException thrown by client-side implementations.
+	 */
+	ICFGenKbGelPopContextFactory getFactoryGelPopContext();
+
+	/**
 	 *	Get the GelPrefixLine Table interface for the schema.
 	 *
 	 *	@return	The GelPrefixLine Table interface for the schema.
